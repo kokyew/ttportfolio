@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TT's Crypto Porfolio</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #dddddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+  </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Coin</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ethereum</td>
+        <td id="eth-amount"></td>
+        <td id="eth-price"></td>
+        <td id="eth-total"></td>
+      </tr>
+      <tr>
+        <td>Binance Coin</td>
+        <td id="bnb-amount"></td>
+        <td id="bnb-price"></td>
+        <td id="bnb-total"></td>
+      </tr>
+      <tr>
+        <td>Matic</td>
+        <td id="matic-amount"></td>
+        <td id="matic-price"></td>
+        <td id="matic-total"></td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td id="total"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+$.getJSON("https://api.coingecko.com/api/v3/simple/price?ids=ethereum,binancecoin,matic-network&vs_currencies=usd", function(data) {
+  var ethAmount = 0.06164505,
+      bnbAmount = 0.30561107,
+      maticAmount = 94.82756548;
+
+  var ethPrice = data.ethereum.usd,
+      bnbPrice = data.binancecoin.usd,
+      maticPrice = data['matic-network'].usd;
+
+  var ethTotal = ethAmount * ethPrice,
+      bnbTotal = bnbAmount * bnbPrice,
+      maticTotal = maticAmount * maticPrice;
+
+  var total = ethTotal + bnbTotal + maticTotal;
+
+  $("#eth-amount").html(ethAmount);
+  $("#eth-price").html("$" + ethPrice);
+  $("#eth-total").html("$" + ethTotal.toFixed(2));
+
+  $("#bnb-amount").html(bnbAmount);
+  $("#bnb-price").html("$" + bnbPrice);
+  $("#bnb-total").html("$" + bnbTotal.toFixed(2));
+
+  $("#matic-amount").html(maticAmount);
+  $("#matic-price").html("$" + maticPrice);
+  $("#matic-total").html("$" + maticTotal.toFixed(2));
+
+  $("#total").html("$" + total.toFixed(2));
+});
+  </script>
+</body>
+</html>
