@@ -35,28 +35,10 @@
     </thead>
     <tbody>
       <tr>
-        <td align="left">Ethereum</td>
-        <td id="eth-amount" align="right"></td>
+        <td align="left">Bitcoin</td>
+        <td id="eth-amount" align="right">0.00347</td>
         <td id="eth-price" align="right"></td>
         <td id="eth-total" align="right"></td>
-      </tr>
-      <tr>
-        <td align="left">Binance Coin</td>
-        <td id="bnb-amount" align="right"></td>
-        <td id="bnb-price" align="right"></td>
-        <td id="bnb-total" align="right"></td>
-      </tr>
-      <tr>
-        <td align="left">Matic</td>
-        <td id="matic-amount" align="right"></td>
-        <td id="matic-price" align="right"></td>
-        <td id="matic-total" align="right"></td>
-      </tr>
-      <tr>
-        <td align="left">Total</td>
-        <td></td>
-        <td></td>
-        <td id="total" align="right"></td>
       </tr>
     </tbody>
 </table>
@@ -65,34 +47,15 @@
 </div>
 
   <script>
-$.getJSON("https://api.coingecko.com/api/v3/simple/price?ids=ethereum,binancecoin,matic-network&vs_currencies=usd", function(data) {
-  var ethAmount = 0.06164505,
-      bnbAmount = 0.30561107,
-      maticAmount = 94.82756548;
+$.getJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd", function(data) {
+  var btcAmount = 0.00347;
 
-  var ethPrice = data.ethereum.usd,
-      bnbPrice = data.binancecoin.usd,
-      maticPrice = data['matic-network'].usd;
+  var btcPrice = data.bitcoin.usd;
 
-  var ethTotal = ethAmount * ethPrice,
-      bnbTotal = bnbAmount * bnbPrice,
-      maticTotal = maticAmount * maticPrice;
-
-  var total = ethTotal + bnbTotal + maticTotal;
-
-  $("#eth-amount").html(ethAmount);
-  $("#eth-price").html("$" + ethPrice);
-  $("#eth-total").html("$" + ethTotal.toFixed(2));
-
-  $("#bnb-amount").html(bnbAmount);
-  $("#bnb-price").html("$" + bnbPrice);
-  $("#bnb-total").html("$" + bnbTotal.toFixed(2));
-
-  $("#matic-amount").html(maticAmount);
-  $("#matic-price").html("$" + maticPrice);
-  $("#matic-total").html("$" + maticTotal.toFixed(2));
-
-  $("#total").html("$" + total.toFixed(2));
+  var btcTotal = btcAmount * btcPrice;
+  
+  $("#btc-price").html("$" + btcPrice);
+  $("#btc-total").html("$" + btcTotal.toFixed(2));
 });
   </script>
 
